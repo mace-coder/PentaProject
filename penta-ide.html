@@ -1,0 +1,873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;PENTA v2 - Web IDE&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.95);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 10px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #666;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.panel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 20px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.editor-panel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.output-panel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.panel-header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.panel-header h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.run-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s, box-shadow 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.run-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.run-btn:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.clear-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #6c757d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-left: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.clear-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #5a6268;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>textarea {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Consolas', 'Monaco', 'Courier New', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resize: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.output {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Consolas', 'Monaco', 'Courier New', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-y: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.output.error {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #dc3545;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.output.success {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #28a745;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.examples {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0 20px 15px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.examples select {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.output-panel {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;PENTA v2&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;A modern programming language with Java-like syntax and powerful features&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel editor-panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="panel-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Code Editor&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="run-btn" onclick="runCode()"&gt;▶ Run Code&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="examples"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;select onchange="loadExample(this.value)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value=""&gt;Load Example...&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="hello"&gt;Hello World&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="math"&gt;Math Operations&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="function"&gt;Functions&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="class"&gt;Classes &amp; Objects&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="control"&gt;Control Flow&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;option value="pipeline"&gt;Pipeline Operator&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea id="code-editor" placeholder="Write your PENTA code here..."&gt;program MyApp:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p "Hello from PENTA v2!"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let x = 10</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let y = 20</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p x + y</p>
+<p class="p1">end</p>
+<p class="p1">end&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel output-panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="panel-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Output&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="clear-btn" onclick="clearOutput()"&gt;Clear&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="output" class="output"&gt;Run your code to see output here...&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const examples = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hello: `program HelloWorld:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p "Hello from PENTA v2!"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p "Welcome to the future of programming!"</p>
+<p class="p1">end</p>
+<p class="p1">end`,</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>math: `program MathDemo:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let a = 15</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let b = 7</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p a + b</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p a - b</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p a * b</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p a / b</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let result = (a + b) * 2</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p result</p>
+<p class="p1">end</p>
+<p class="p1">end`,</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function: `program FunctionDemo:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fun add(a:int, b:int) -&gt; int:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return a + b</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>fun greet(name:string) -&gt; string:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return "Hello, " + name</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let sum = add(10, 20)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p sum</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let greeting = greet("Alice")</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p greeting</p>
+<p class="p1">end</p>
+<p class="p1">end`,</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>class: `program ClassDemo:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>class Person:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let name: string</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let age: int</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fun speak():</p>
+<p class="p1"><span class="Apple-converted-space">            </span>p "I am " + name</p>
+<p class="p1"><span class="Apple-converted-space">        </span>end</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let p = Person("Alice", 25)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p.speak()</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p p.name</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p p.age</p>
+<p class="p1">end</p>
+<p class="p1">end`,</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>control: `program ControlFlow:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let x = 15</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if x &gt; 10:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p "x is greater than 10"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>elif x &gt; 5:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p "x is greater than 5"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>else:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p "x is 5 or less"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let a = 5</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let b = 10</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if a &lt; b:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>p "a is less than b"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p1">end</p>
+<p class="p1">end`,</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>pipeline: `program PipelineDemo:</p>
+<p class="p1">main:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fun double(x:int) -&gt; int:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return x * 2</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>fun add10(x:int) -&gt; int:</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return x + 10</p>
+<p class="p1"><span class="Apple-converted-space">    </span>end</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let result = 5</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p result</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let doubled = double(result)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p doubled</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let final = add10(doubled)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p final</p>
+<p class="p1">end</p>
+<p class="p1">end`</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadExample(key) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (key &amp;&amp; examples[key]) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('code-editor').value = examples[key];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function clearOutput() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('output').textContent = 'Run your code to see output here...';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('output').className = 'output';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function runCode() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const code = document.getElementById('code-editor').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const outputEl = document.getElementById('output');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = interpretPenta(code);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputEl.textContent = result || '(Program executed successfully with no output)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputEl.className = 'output success';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputEl.textContent = '❌ Error: ' + error.message;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputEl.className = 'output error';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Simplified PENTA interpreter</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function interpretPenta(code) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const output = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const variables = {};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const functions = {};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const classes = {};</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Tokenize</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tokens = tokenize(code);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Parse and execute</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let i = 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function current() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return tokens[i];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function advance() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>i++;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function expect(type) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (current().type !== type) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>throw new Error(`Expected ${type}, got ${current().type} at line ${current().line}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const token = current();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return token;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Skip to main block</p>
+<p class="p1"><span class="Apple-converted-space">            </span>while (i &lt; tokens.length &amp;&amp; current().value !== 'main') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (current().value === 'main') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>advance(); // skip 'main'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expect('COLON');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Execute main block</p>
+<p class="p1"><span class="Apple-converted-space">                </span>while (i &lt; tokens.length &amp;&amp; current().value !== 'end') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>executeStatement();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function executeStatement() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const token = current();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (token.value === 'p' || token.value === 'P') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const value = evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>output.push(String(value));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.value === 'let' || token.value === 'const') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const name = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('ASSIGN');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const value = evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variables[name] = value;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.value === 'fun') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const name = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('LPAREN');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const params = [];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (current().type !== 'RPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>params.push(expect('IDENTIFIER').value);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().type === 'COLON') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance(); // skip type</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().type === 'COMMA') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('RPAREN');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (current().type === 'ARROW') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance(); // skip return type</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('COLON');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bodyStart = i;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let depth = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (depth &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().value === 'end') depth--;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else if (['fun', 'class', 'if'].includes(current().value)) depth++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bodyEnd = i;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>functions[name] = { params, bodyStart, bodyEnd };</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance(); // skip 'end'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.value === 'class') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const className = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('COLON');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const properties = [];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const methods = {};</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (current().value !== 'end') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().value === 'let') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const propName = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (current().type === 'COLON') {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>advance(); // skip type</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>properties.push(propName);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else if (current().value === 'fun') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const methodName = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>expect('LPAREN');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>while (current().type !== 'RPAREN') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>expect('RPAREN');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>expect('COLON');</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const methodStart = i;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>let depth = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>while (depth &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (current().value === 'end') depth--;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>methods[methodName] = { start: methodStart, end: i };</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>classes[className] = { properties, methods };</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance(); // skip 'end'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.value === 'if') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const condition = evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('COLON');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (condition) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>while (current().value !== 'end' &amp;&amp;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                               </span>current().value !== 'elif' &amp;&amp;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                               </span>current().value !== 'else') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>executeStatement();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Skip to end</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let depth = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (depth &gt; 0 &amp;&amp; i &lt; tokens.length) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().value === 'if') depth++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().value === 'end') depth--;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (depth &gt; 0) advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (current().value === 'end') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.value === 'return') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.type === 'IDENTIFIER') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Could be assignment or function call</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const name = token.value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (current().type === 'ASSIGN') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>variables[name] = evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (current().type === 'LPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Function call</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const args = [];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>while (current().type !== 'RPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>args.push(evaluateExpression());</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (current().type === 'COMMA') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>expect('RPAREN');</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (functions[name]) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Simple function execution</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const func = functions[name];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const savedVars = {...variables};</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>func.params.forEach((param, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>variables[param] = args[idx];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const savedI = i;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>i = func.bodyStart;</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>let returnValue = null;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>while (i &lt; func.bodyEnd) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>const result = executeStatement();</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (result !== undefined) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>returnValue = result;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>i = savedI;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Object.assign(variables, savedVars);</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return returnValue;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else if (classes[name]) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Constructor call</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const cls = classes[name];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const instance = { _class: name };</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>cls.properties.forEach((prop, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>instance[prop] = args[idx];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return instance;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (current().type === 'DOT') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Method call</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const method = expect('IDENTIFIER').value;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (current().type === 'LPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>expect('LPAREN');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const args = [];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>while (current().type !== 'RPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>args.push(evaluateExpression());</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (current().type === 'COMMA') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>expect('RPAREN');</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const obj = variables[name];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (obj &amp;&amp; obj._class) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>const cls = classes[obj._class];</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (cls.methods[method]) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>const savedVars = {...variables};</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Object.assign(variables, obj);</p>
+<p class="p2"><span class="Apple-converted-space">                                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>const savedI = i;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>i = cls.methods[method].start;</p>
+<p class="p2"><span class="Apple-converted-space">                                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>while (i &lt; cls.methods[method].end) {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>executeStatement();</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>i = savedI;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Object.assign(variables, savedVars);</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function evaluateExpression() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return evaluateComparison();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function evaluateComparison() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let left = evaluateAdditive();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>while (['GT', 'LT', 'GTE', 'LTE', 'EQ', 'NEQ'].includes(current().type)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const op = current().value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const right = evaluateAdditive();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (op === '&gt;') left = left &gt; right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '&lt;') left = left &lt; right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '&gt;=') left = left &gt;= right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '&lt;=') left = left &lt;= right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '==') left = left == right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '!=') left = left != right;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function evaluateAdditive() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let left = evaluateMultiplicative();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>while (current().type === 'PLUS' || current().type === 'MINUS') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const op = current().value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const right = evaluateMultiplicative();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (op === '+') left = left + right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '-') left = left - right;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function evaluateMultiplicative() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let left = evaluatePrimary();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>while (current().type === 'MULTIPLY' || current().type === 'DIVIDE') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const op = current().value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const right = evaluatePrimary();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (op === '*') left = left * right;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (op === '/') left = left / right;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function evaluatePrimary() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const token = current();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (token.type === 'NUMBER') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return token.value;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.type === 'STRING') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return token.value;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.type === 'BOOL') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return token.value;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.type === 'IDENTIFIER') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const name = token.value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (current().type === 'LPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Function call in expression</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const args = [];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>while (current().type !== 'RPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>args.push(evaluateExpression());</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (current().type === 'COMMA') advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>expect('RPAREN');</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (functions[name]) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const func = functions[name];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const savedVars = {...variables};</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>func.params.forEach((param, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>variables[param] = args[idx];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const savedI = i;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>i = func.bodyStart;</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>let returnValue = null;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>while (i &lt; func.bodyEnd) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>const result = executeStatement();</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (result !== undefined) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>returnValue = result;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>i = savedI;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Object.assign(variables, savedVars);</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return returnValue;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>else if (classes[name]) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const cls = classes[name];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const instance = { _class: name };</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>cls.properties.forEach((prop, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>instance[prop] = args[idx];</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>variables[name.toLowerCase()] = instance;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return instance;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (current().type === 'DOT') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Property access</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const prop = expect('IDENTIFIER').value;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const obj = variables[name];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>return obj ? obj[prop] : undefined;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return variables[name];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (token.type === 'LPAREN') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>advance();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const value = evaluateExpression();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expect('RPAREN');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return value;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>throw new Error(`Unexpected token: ${token.type}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return output.join('\n');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function tokenize(code) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tokens = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let pos = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let line = 1;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const keywords = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'program': 'PROGRAM', 'main': 'MAIN', 'end': 'END',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'let': 'LET', 'const': 'CONST', 'fun': 'FUN',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'class': 'CLASS', 'return': 'RETURN',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'if': 'IF', 'elif': 'ELIF', 'else': 'ELSE',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'true': 'BOOL', 'false': 'BOOL',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'p': 'PRINT', 'P': 'PRINT'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>while (pos &lt; code.length) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let char = code[pos];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Skip whitespace</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (/\s/.test(char)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (char === '\n') line++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Numbers</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (/\d/.test(char)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let num = '';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (pos &lt; code.length &amp;&amp; /[\d.]/.test(code[pos])) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>num += code[pos++];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tokens.push({ type: 'NUMBER', value: parseFloat(num), line });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Strings</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (char === '"' || char === "'") {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const quote = char;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let str = '';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (pos &lt; code.length &amp;&amp; code[pos] !== quote) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>str += code[pos++];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos++; // skip closing quote</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tokens.push({ type: 'STRING', value: str, line });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Identifiers and keywords</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (/[a-zA-Z_]/.test(char)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let id = '';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>while (pos &lt; code.length &amp;&amp; /[a-zA-Z0-9_]/.test(code[pos])) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>id += code[pos++];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const type = keywords[id] || 'IDENTIFIER';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const value = type === 'BOOL' ? (id === 'true') : id;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tokens.push({ type, value, line });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Operators</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (char === '+') { tokens.push({ type: 'PLUS', value: '+', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '-') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (code[pos + 1] === '&gt;') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'ARROW', value: '-&gt;', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos += 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'MINUS', value: '-', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '*') { tokens.push({ type: 'MULTIPLY', value: '*', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '/') { tokens.push({ type: 'DIVIDE', value: '/', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '=') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (code[pos + 1] === '=') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'EQ', value: '==', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos += 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'ASSIGN', value: '=', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '!') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (code[pos + 1] === '=') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'NEQ', value: '!=', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos += 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '&gt;') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (code[pos + 1] === '=') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'GTE', value: '&gt;=', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos += 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'GT', value: '&gt;', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '&lt;') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (code[pos + 1] === '=') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'LTE', value: '&lt;=', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos += 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tokens.push({ type: 'LT', value: '&lt;', line });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '|') { tokens.push({ type: 'PIPE', value: '|', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '(') { tokens.push({ type: 'LPAREN', value: '(', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === ')') { tokens.push({ type: 'RPAREN', value: ')', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === ':') { tokens.push({ type: 'COLON', value: ':', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === ',') { tokens.push({ type: 'COMMA', value: ',', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (char === '.') { tokens.push({ type: 'DOT', value: '.', line }); pos++; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>pos++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return tokens;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
